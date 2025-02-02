@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Speed Test UI</title>
+    <link rel="stylesheet" href="frontend\style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Your Results</h2>
+            <div class="info">
+                <p>Ping: <span id="ping">--</span> ms</p>
+                <p>Jitter: <span id="jitter">--</span> ms</p>
+            </div>
+            <div class="gauge">
+                <div class="needle"></div>
+                <div class="speed-text"><span id="speed">0</span> Mbps</div>
+                <div class="loader"></div>
+            </div>
+            <div class="info">
+                <p>Download: <span id="download">--</span> Mbps</p>
+                <p>Upload: <span id="upload">--</span> Mbps</p>
+            </div>
+            <button id="start-btn">Start Test</button>
+            <div class="history">
+                <h3>Test History</h3>
+                <ul id="history-list"></ul>
+            </div>
+        </div>
+    </div>
+    <audio id="complete-sound" src="complete.mp3"></audio>
+    <script src="backend\script.js"></script>
+</body>
+</html>
