@@ -78,7 +78,7 @@ To run this project locally:
    ```
 2. Navigate to the project folder:
    ```bash
-   cd your-repo-name
+   cd internet-speed-checker
    ```
 3. Open `index.html` in your browser.
 
@@ -116,5 +116,3 @@ For questions or feedback, feel free to reach out:
 - **Email**: shinobiquartz@gmail.com
 - **GitHub**: [Peshala Dilshan](https://github.com/peshaladilshan)
 ```
-
----
