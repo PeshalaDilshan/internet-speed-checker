@@ -3,7 +3,6 @@
 A modern and sleek web application to check your internet speed in real-time. Built with **HTML**, **CSS**, and **JavaScript**, this project features a **glassmorphism UI**, **smooth animations**, and **responsive design**.
 
 ![Screenshot](https://i.ibb.co/gFwYw5jk/IMG-20250203-035935.jpg)
-<a href="https://ibb.co/842k2WK1"><img src="https://i.ibb.co/gFwYw5jk/IMG-20250203-035935.jpg" alt="IMG-20250203-035935" border="0"></a>
 ---
 
 ## ✨ Features
