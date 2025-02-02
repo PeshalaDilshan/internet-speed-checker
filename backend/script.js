@@ -13,7 +13,7 @@ document.getElementById("start-btn").addEventListener("click", async function ()
 
     try {
         // Replace with your Speedtest API endpoint
-        const response = await fetch("https://api.speedtest.net/v1/speedtest");
+        const response = await fetch("https://api.speedtest.net");
         const data = await response.json();
 
         // Extract results
