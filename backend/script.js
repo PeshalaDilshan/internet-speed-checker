@@ -12,42 +12,36 @@ document.getElementById("start-btn").addEventListener("click", async function ()
     document.getElementById("jitter").textContent = "...";
 
     try {
-        // Simulate speed test (replace with real API call)
-        const simulateSpeedTest = () => {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve({
-                        speed: Math.floor(Math.random() * 100) + 1,
-                        download: (Math.random() * 90).toFixed(1),
-                        upload: (Math.random() * 50).toFixed(1),
-                        ping: Math.floor(Math.random() * 50) + 1,
-                        jitter: Math.floor(Math.random() * 20) + 1,
-                    });
-                }, 2000); // Simulate a 2-second delay
-            });
-        };
+        // Replace with your Speedtest API endpoint
+        const response = await fetch("https://api.speedtest.net/v1/speedtest");
+        const data = await response.json();
 
-        const results = await simulateSpeedTest();
+        // Extract results
+        const speed = data.download.bandwidth / 125000; // Convert bytes to Mbps
+        const download = (speed * 0.9).toFixed(1); // Simulate download speed
+        const upload = (speed * 0.2).toFixed(1); // Simulate upload speed
+        const ping = data.ping.latency;
+        const jitter = data.ping.jitter;
 
         // Update UI with results
-        document.getElementById("speed").textContent = results.speed;
-        document.getElementById("download").textContent = results.download;
-        document.getElementById("upload").textContent = results.upload;
-        document.getElementById("ping").textContent = results.ping;
-        document.getElementById("jitter").textContent = results.jitter;
+        document.getElementById("speed").textContent = speed.toFixed(1);
+        document.getElementById("download").textContent = download;
+        document.getElementById("upload").textContent = upload;
+        document.getElementById("ping").textContent = ping;
+        document.getElementById("jitter").textContent = jitter;
 
         // Rotate needle smoothly based on speed
-        let angle = (results.speed / 100) * 180 - 90;
+        let angle = (speed / 100) * 180 - 90;
         document.querySelector(".needle").style.transform = `rotate(${angle}deg)`;
 
         // Add results to history
-        history.push(results);
+        history.push({ speed: speed.toFixed(1), download, upload, ping, jitter });
         updateHistory();
 
         // Play sound
         document.getElementById("complete-sound").play();
     } catch (error) {
-        console.error("Error during speed test:", error);
+        console.error("Error fetching speed data:", error);
         document.getElementById("speed").textContent = "Error";
         document.getElementById("download").textContent = "Error";
         document.getElementById("upload").textContent = "Error";
