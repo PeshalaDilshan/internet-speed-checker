@@ -2,7 +2,7 @@
 
 A modern and sleek web application to check your internet speed in real-time. Built with **HTML**, **CSS**, and **JavaScript**, this project features a **glassmorphism UI**, **smooth animations**, and **responsive design**.
 
-![Screenshot](https://imgur.com/a/G5GY4HV)
+![Screenshot](https://imgur.com/a/internet-speed-checker-G5GY4HV)
 
 ---
 
