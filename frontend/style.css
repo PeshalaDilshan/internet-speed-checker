@@ -150,3 +150,23 @@ button:hover {
     margin-bottom: 5px;
     color: #ccc;
 }
+
+/* Export Button */
+#export-btn {
+    background: linear-gradient(135deg, #00e096, #00b377);
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    color: #000;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(0, 224, 150, 0.5);
+}
+
+#export-btn:hover {
+    background: linear-gradient(135deg, #00cc88, #009966);
+    box-shadow: 0 0 15px rgba(0, 204, 136, 0.8);
+    transform: scale(1.05);
+}
