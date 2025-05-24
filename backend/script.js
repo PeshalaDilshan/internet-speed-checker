@@ -1,4 +1,5 @@
 let history = [];
+const SPEED_TEST_API_URL = "https://api.speedtest.net";
 
 document.getElementById("start-btn").addEventListener("click", async function () {
     // Show loader
@@ -13,7 +14,10 @@ document.getElementById("start-btn").addEventListener("click", async function ()
 
     try {
         // Replace with your Speedtest API endpoint
-        const response = await fetch("https://api.speedtest.net");
+        const response = await fetch(SPEED_TEST_API_URL); // Changed to use constant
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`);
+        }
         const data = await response.json();
 
         // Extract results
@@ -41,12 +45,20 @@ document.getElementById("start-btn").addEventListener("click", async function ()
         // Play sound
         document.getElementById("complete-sound").play();
     } catch (error) {
-        console.error("Error fetching speed data:", error);
-        document.getElementById("speed").textContent = "Error";
-        document.getElementById("download").textContent = "Error";
-        document.getElementById("upload").textContent = "Error";
-        document.getElementById("ping").textContent = "Error";
-        document.getElementById("jitter").textContent = "Error";
+        console.error("Speed test API error:", error); // Log the actual error object
+
+        let userErrorMessage = "Error fetching results."; // Default UI error message
+        if (error.message.startsWith("API request failed")) { // Error from our !response.ok check
+            userErrorMessage = `API error (${error.message.split(' ').pop()}). Please try again.`;
+        } else if (error instanceof TypeError) { // Often indicates network issues
+            userErrorMessage = "Network error. Check connection.";
+        }
+
+        document.getElementById("speed").textContent = userErrorMessage;
+        document.getElementById("download").textContent = "---"; // Use neutral placeholders
+        document.getElementById("upload").textContent = "---";
+        document.getElementById("ping").textContent = "---";
+        document.getElementById("jitter").textContent = "---";
     } finally {
         // Hide loader
         document.querySelector(".loader").style.display = "none";
@@ -68,4 +80,80 @@ function updateHistory() {
     `
         )
         .join("");
+}
+
+function exportHistory() {
+    if (history.length === 0) {
+        alert("No history to export.");
+        return;
+    }
+
+    const header = "Test Number,Download (Mbps),Upload (Mbps),Ping (ms),Jitter (ms)";
+    const csvRows = history.map((result, index) => 
+        `${index + 1},${result.download},${result.upload},${result.ping},${result.jitter}`
+    );
+    const csvString = [header, ...csvRows].join("\n");
+
+    const blob = new Blob([csvString], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "speedtest_history.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+document.getElementById("export-btn").addEventListener("click", exportHistory);
+
+// Theme Switching Functionality
+const themeSelector = document.getElementById('theme-select');
+
+function applyTheme(themeValue) {
+    document.body.setAttribute('data-theme', themeValue);
+}
+
+function saveThemePreference(themeValue) {
+    localStorage.setItem('theme', themeValue);
+}
+
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        applyTheme(savedTheme);
+        if (themeSelector) { // Ensure themeSelector exists
+            themeSelector.value = savedTheme;
+        }
+    } else {
+        // Apply 'neon' as default if no theme is saved
+        applyTheme('neon'); 
+        if (themeSelector) { // Ensure themeSelector exists
+            themeSelector.value = 'neon';
+        }
+    }
+}
+
+if (themeSelector) { // Ensure themeSelector exists before adding listener
+    themeSelector.addEventListener('change', function() {
+        const selectedTheme = themeSelector.value;
+        applyTheme(selectedTheme);
+        saveThemePreference(selectedTheme);
+    });
+}
+
+// Load saved theme on page load
+loadSavedTheme();
+
+// Expose functions and history for testing
+if (typeof window !== 'undefined') { // Ensure this only runs in a browser-like environment
+    window.updateHistory = updateHistory;
+    window.exportHistory = exportHistory;
+    window.applyTheme = applyTheme;
+    window.saveThemePreference = saveThemePreference;
+    window.loadSavedTheme = loadSavedTheme;
+    window.getHistory = () => history; // Expose the history array getter
+    window.setHistory = (newHistory) => { history = newHistory; }; // Expose the history array setter
+    window.resetHistory = () => { history = []; }; // Expose a way to reset history
 }
