@@ -95,3 +95,53 @@ function exportHistory() {
 }
 
 document.getElementById("export-btn").addEventListener("click", exportHistory);
+
+// Theme Switching Functionality
+const themeSelector = document.getElementById('theme-select');
+
+function applyTheme(themeValue) {
+    document.body.setAttribute('data-theme', themeValue);
+}
+
+function saveThemePreference(themeValue) {
+    localStorage.setItem('theme', themeValue);
+}
+
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        applyTheme(savedTheme);
+        if (themeSelector) { // Ensure themeSelector exists
+            themeSelector.value = savedTheme;
+        }
+    } else {
+        // Apply 'neon' as default if no theme is saved
+        applyTheme('neon'); 
+        if (themeSelector) { // Ensure themeSelector exists
+            themeSelector.value = 'neon';
+        }
+    }
+}
+
+if (themeSelector) { // Ensure themeSelector exists before adding listener
+    themeSelector.addEventListener('change', function() {
+        const selectedTheme = themeSelector.value;
+        applyTheme(selectedTheme);
+        saveThemePreference(selectedTheme);
+    });
+}
+
+// Load saved theme on page load
+loadSavedTheme();
+
+// Expose functions and history for testing
+if (typeof window !== 'undefined') { // Ensure this only runs in a browser-like environment
+    window.updateHistory = updateHistory;
+    window.exportHistory = exportHistory;
+    window.applyTheme = applyTheme;
+    window.saveThemePreference = saveThemePreference;
+    window.loadSavedTheme = loadSavedTheme;
+    window.getHistory = () => history; // Expose the history array getter
+    window.setHistory = (newHistory) => { history = newHistory; }; // Expose the history array setter
+    window.resetHistory = () => { history = []; }; // Expose a way to reset history
+}
