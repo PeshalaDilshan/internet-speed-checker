@@ -1,14 +1,52 @@
 /* Global Styles */
+:root {
+    --background-gradient-start: #0f172a;
+    --background-gradient-end: #1e293b;
+    --text-color: #fff;
+    --card-background: rgba(255, 255, 255, 0.1);
+    --card-border-color: rgba(255, 255, 255, 0.2);
+    --primary-accent-color: #00eaff;
+    --primary-accent-shadow: rgba(0, 255, 255, 0.5);
+    --button-text-color: #000;
+    --start-btn-gradient-start: #00eaff;
+    --start-btn-gradient-end: #008cff;
+    --start-btn-shadow: rgba(0, 255, 255, 0.5);
+    --export-btn-gradient-start: #00e096;
+    --export-btn-gradient-end: #00b377;
+    --export-btn-shadow: rgba(0, 224, 150, 0.5);
+    --history-text-color: #ccc;
+    --loader-border-color: rgba(0, 255, 255, 0.3);
+}
+
 body {
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: #fff;
+    background: linear-gradient(135deg, var(--background-gradient-start), var(--background-gradient-end));
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     overflow: hidden;
+}
+
+body.dark-mode {
+    --background-gradient-start: #121212;
+    --background-gradient-end: #1e1e1e;
+    --text-color: #e0e0e0;
+    --card-background: rgba(0, 0, 0, 0.2);
+    --card-border-color: rgba(255, 255, 255, 0.1);
+    --primary-accent-color: #bb86fc;
+    --primary-accent-shadow: rgba(187, 134, 252, 0.5);
+    --button-text-color: #e0e0e0;
+    --start-btn-gradient-start: #bb86fc;
+    --start-btn-gradient-end: #9c27b0;
+    --start-btn-shadow: rgba(187, 134, 252, 0.5);
+    --export-btn-gradient-start: #cf6679;
+    --export-btn-gradient-end: #b00020;
+    --export-btn-shadow: rgba(207, 102, 121, 0.5);
+    --history-text-color: #a0a0a0;
+    --loader-border-color: rgba(187, 134, 252, 0.3);
 }
 
 /* Card Container */
@@ -20,14 +58,14 @@ body {
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--card-background);
     backdrop-filter: blur(15px);
     border-radius: 20px;
     padding: 25px;
     width: 320px;
     text-align: center;
-    box-shadow: 0 4px 30px rgba(0, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px var(--primary-accent-shadow); /* Updated to use variable */
+    border: 1px solid var(--card-border-color);
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -39,9 +77,9 @@ body {
 /* Headers */
 h2 {
     font-size: 22px;
-    color: #00eaff;
+    color: var(--primary-accent-color);
     margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 10px var(--primary-accent-shadow);
 }
 
 /* Info (Ping, Jitter, Download, Upload) */
@@ -54,6 +92,7 @@ h2 {
 
 .info p {
     margin: 0;
+    color: var(--text-color); /* Ensure info text also uses the main text color */
 }
 
 /* Speedometer Gauge */
@@ -62,12 +101,12 @@ h2 {
     width: 150px;
     height: 150px;
     margin: 20px auto;
-    border: 8px solid rgba(0, 255, 255, 0.5);
+    border: 8px solid var(--primary-accent-shadow); /* Updated to use variable */
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 20px var(--primary-accent-shadow); /* Updated to use variable */
 }
 
 /* Needle Animation */
@@ -75,11 +114,11 @@ h2 {
     position: absolute;
     width: 4px;
     height: 50px;
-    background: cyan;
+    background: var(--primary-accent-color); /* Updated to use variable */
     transform-origin: bottom;
     transform: rotate(-90deg);
     transition: transform 1s ease-in-out;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 10px var(--primary-accent-shadow); /* Updated to use variable */
 }
 
 /* Speed Text */
@@ -87,8 +126,8 @@ h2 {
     position: absolute;
     font-size: 22px;
     font-weight: bold;
-    color: #00eaff;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    color: var(--primary-accent-color); /* Updated to use variable */
+    text-shadow: 0 0 10px var(--primary-accent-shadow); /* Updated to use variable */
 }
 
 /* Loading Animation */
@@ -98,8 +137,8 @@ h2 {
 }
 
 .loader {
-    border: 4px solid rgba(0, 255, 255, 0.3);
-    border-top: 4px solid #00eaff;
+    border: 4px solid var(--loader-border-color); /* Updated to use variable */
+    border-top: 4px solid var(--primary-accent-color); /* Updated to use variable */
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -113,7 +152,7 @@ h2 {
     border: none;
     padding: 12px 20px;
     font-size: 18px;
-    color: #000;
+    color: var(--button-text-color); /* Updated to use variable */
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
@@ -125,26 +164,29 @@ h2 {
 
 /* Start Test Button Specific Styles */
 #start-btn {
-    background: linear-gradient(135deg, #00eaff, #008cff);
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    background: linear-gradient(135deg, var(--start-btn-gradient-start), var(--start-btn-gradient-end));
+    box-shadow: 0 0 10px var(--start-btn-shadow);
     margin-top: 15px;
 }
 
 #start-btn:hover {
-    background: linear-gradient(135deg, #00ccff, #006aff);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    /* Consider defining hover state variables or slightly darkening the existing ones if needed */
+    background: linear-gradient(135deg, var(--start-btn-gradient-start), var(--start-btn-gradient-end)); /* Keeping same for now */
+    filter: brightness(110%); /* Example: slightly brighten on hover */
+    box-shadow: 0 0 15px var(--start-btn-shadow); /* Slightly more prominent shadow */
 }
 
 /* Export History Button Specific Styles */
 #export-btn {
-    background: linear-gradient(135deg, #00e096, #00b377);
-    box-shadow: 0 0 10px rgba(0, 224, 150, 0.5);
+    background: linear-gradient(135deg, var(--export-btn-gradient-start), var(--export-btn-gradient-end));
+    box-shadow: 0 0 10px var(--export-btn-shadow);
     margin-top: 10px;
 }
 
 #export-btn:hover {
-    background: linear-gradient(135deg, #00cc88, #009966);
-    box-shadow: 0 0 15px rgba(0, 204, 136, 0.8);
+    background: linear-gradient(135deg, var(--export-btn-gradient-start), var(--export-btn-gradient-end)); /* Keeping same for now */
+    filter: brightness(110%); /* Example: slightly brighten on hover */
+    box-shadow: 0 0 15px var(--export-btn-shadow); /* Slightly more prominent shadow */
 }
 
 /* History Section */
@@ -155,7 +197,7 @@ h2 {
 
 .history h3 {
     font-size: 18px;
-    color: #00eaff;
+    color: var(--primary-accent-color); /* Updated to use variable */
     margin-bottom: 10px;
 }
 
@@ -167,5 +209,5 @@ h2 {
 .history li {
     font-size: 14px;
     margin-bottom: 5px;
-    color: #ccc;
+    color: var(--history-text-color); /* Updated to use variable */
 }

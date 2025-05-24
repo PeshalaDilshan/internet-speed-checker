@@ -1,3 +1,28 @@
+// Dark mode implementation
+const mainCard = document.querySelector('.card');
+let clickCount = 0;
+
+// Check localStorage for dark mode state on load
+if (localStorage.getItem('darkModeEnabled') === 'true') {
+    document.body.classList.add('dark-mode');
+}
+
+if (mainCard) {
+    mainCard.addEventListener('click', () => {
+        clickCount++;
+        if (clickCount >= 10) {
+            document.body.classList.toggle('dark-mode');
+            // Store current dark mode state in localStorage
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkModeEnabled', 'true');
+            } else {
+                localStorage.setItem('darkModeEnabled', 'false');
+            }
+            clickCount = 0; // Reset counter
+        }
+    });
+}
+
 let history = [];
 
 document.getElementById("start-btn").addEventListener("click", async function () {
