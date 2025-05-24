@@ -69,3 +69,67 @@ function updateHistory() {
         )
         .join("");
 }
+
+function exportHistory() {
+    if (history.length === 0) {
+        alert("No history to export.");
+        return;
+    }
+
+    const header = "Test Number,Download (Mbps),Upload (Mbps),Ping (ms),Jitter (ms)";
+    const csvRows = history.map((result, index) => 
+        `${index + 1},${result.download},${result.upload},${result.ping},${result.jitter}`
+    );
+    const csvString = [header, ...csvRows].join("\n");
+
+    const blob = new Blob([csvString], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "speedtest_history.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+document.getElementById("export-btn").addEventListener("click", exportHistory);
+
+// Theme Switching Functionality
+const themeSelector = document.getElementById('theme-select');
+
+function applyTheme(themeValue) {
+    document.body.setAttribute('data-theme', themeValue);
+}
+
+function saveThemePreference(themeValue) {
+    localStorage.setItem('theme', themeValue);
+}
+
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        applyTheme(savedTheme);
+        if (themeSelector) { // Ensure themeSelector exists
+            themeSelector.value = savedTheme;
+        }
+    } else {
+        // Apply 'neon' as default if no theme is saved
+        applyTheme('neon'); 
+        if (themeSelector) { // Ensure themeSelector exists
+            themeSelector.value = 'neon';
+        }
+    }
+}
+
+if (themeSelector) { // Ensure themeSelector exists before adding listener
+    themeSelector.addEventListener('change', function() {
+        const selectedTheme = themeSelector.value;
+        applyTheme(selectedTheme);
+        saveThemePreference(selectedTheme);
+    });
+}
+
+// Load saved theme on page load
+loadSavedTheme();
