@@ -1,8 +1,90 @@
 /* Global Styles */
+:root {
+    /* Neon Theme (Default) */
+    --body-bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+    --text-primary: #fff;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-backdrop-filter: blur(15px);
+    --card-box-shadow-color: rgba(0, 255, 255, 0.2);
+    --card-border-color: rgba(255, 255, 255, 0.2);
+    --text-accent: #00eaff;
+    --text-accent-shadow-color: rgba(0, 255, 255, 0.5);
+    --gauge-border-color: rgba(0, 255, 255, 0.5);
+    --gauge-box-shadow-color: rgba(0, 255, 255, 0.5);
+    --needle-bg: cyan;
+    --needle-box-shadow-color: rgba(0, 255, 255, 0.5);
+    --loader-border-inactive: rgba(0, 255, 255, 0.3);
+    --loader-border-active: #00eaff;
+    --btn-text-color: #000;
+    --btn-start-bg-gradient: linear-gradient(135deg, #00eaff, #008cff);
+    --btn-start-box-shadow-color: rgba(0, 255, 255, 0.5);
+    --btn-start-hover-bg-gradient: linear-gradient(135deg, #00ccff, #006aff);
+    --btn-start-hover-box-shadow-color: rgba(0, 255, 255, 0.8);
+    --btn-export-bg-gradient: linear-gradient(135deg, #00e096, #00b377);
+    --btn-export-box-shadow-color: rgba(0, 224, 150, 0.5);
+    --btn-export-hover-bg-gradient: linear-gradient(135deg, #00cc88, #009966);
+    --btn-export-hover-box-shadow-color: rgba(0, 204, 136, 0.8);
+    --history-item-color: #ccc;
+}
+
+body[data-theme="dark"] {
+    --body-bg-gradient: linear-gradient(135deg, #1a1a2a, #0a0a1a);
+    --text-primary: #d0d0d0;
+    --card-bg: rgba(40, 40, 50, 0.25);
+    --card-backdrop-filter: blur(10px);
+    --card-box-shadow-color: rgba(100, 100, 220, 0.2);
+    --card-border-color: rgba(100, 100, 220, 0.25);
+    --text-accent: #00c0c0;
+    --text-accent-shadow-color: rgba(0, 192, 192, 0.4);
+    --gauge-border-color: rgba(0, 192, 192, 0.4);
+    --gauge-box-shadow-color: rgba(0, 192, 192, 0.4);
+    --needle-bg: #00c0c0;
+    --needle-box-shadow-color: rgba(0, 192, 192, 0.4);
+    --loader-border-inactive: rgba(0, 192, 192, 0.25);
+    --loader-border-active: #00c0c0;
+    --btn-text-color: #e0e0e0;
+    --btn-start-bg-gradient: linear-gradient(135deg, #007a7a, #005f5f);
+    --btn-start-box-shadow-color: rgba(0, 122, 122, 0.4);
+    --btn-start-hover-bg-gradient: linear-gradient(135deg, #009696, #007a7a);
+    --btn-start-hover-box-shadow-color: rgba(0, 150, 150, 0.6);
+    --btn-export-bg-gradient: linear-gradient(135deg, #008a63, #006f4f);
+    --btn-export-box-shadow-color: rgba(0, 138, 99, 0.4);
+    --btn-export-hover-bg-gradient: linear-gradient(135deg, #00a377, #008a63);
+    --btn-export-hover-box-shadow-color: rgba(0, 163, 119, 0.6);
+    --history-item-color: #a0a0a0;
+}
+
+body[data-theme="light"] {
+    --body-bg-gradient: linear-gradient(135deg, #e9ecef, #dee2e6);
+    --text-primary: #212529;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-backdrop-filter: blur(5px);
+    --card-box-shadow-color: rgba(0, 0, 0, 0.1);
+    --card-border-color: rgba(0, 0, 0, 0.15);
+    --text-accent: #007bff;
+    --text-accent-shadow-color: rgba(0, 123, 255, 0.3);
+    --gauge-border-color: rgba(0, 123, 255, 0.4);
+    --gauge-box-shadow-color: rgba(0, 123, 255, 0.3);
+    --needle-bg: #007bff;
+    --needle-box-shadow-color: rgba(0, 123, 255, 0.3);
+    --loader-border-inactive: rgba(0, 123, 255, 0.2);
+    --loader-border-active: #007bff;
+    --btn-text-color: #ffffff;
+    --btn-start-bg-gradient: linear-gradient(135deg, #007bff, #0056b3);
+    --btn-start-box-shadow-color: rgba(0, 123, 255, 0.4);
+    --btn-start-hover-bg-gradient: linear-gradient(135deg, #0069d9, #004085);
+    --btn-start-hover-box-shadow-color: rgba(0, 105, 217, 0.6);
+    --btn-export-bg-gradient: linear-gradient(135deg, #28a745, #1e7e34);
+    --btn-export-box-shadow-color: rgba(40, 167, 69, 0.4);
+    --btn-export-hover-bg-gradient: linear-gradient(135deg, #218838, #19692c);
+    --btn-export-hover-box-shadow-color: rgba(33, 136, 56, 0.6);
+    --history-item-color: #495057;
+}
+
 body {
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: #fff;
+    background: var(--body-bg-gradient);
+    color: var(--text-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,14 +102,14 @@ body {
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
+    background: var(--card-bg);
+    backdrop-filter: var(--card-backdrop-filter);
     border-radius: 20px;
     padding: 25px;
     width: 320px;
     text-align: center;
-    box-shadow: 0 4px 30px rgba(0, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px var(--card-box-shadow-color);
+    border: 1px solid var(--card-border-color);
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -39,9 +121,9 @@ body {
 /* Headers */
 h2 {
     font-size: 22px;
-    color: #00eaff;
+    color: var(--text-accent);
     margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 10px var(--text-accent-shadow-color);
 }
 
 /* Info (Ping, Jitter, Download, Upload) */
@@ -54,6 +136,7 @@ h2 {
 
 .info p {
     margin: 0;
+    /* Uses --text-primary from body */
 }
 
 /* Speedometer Gauge */
@@ -62,12 +145,12 @@ h2 {
     width: 150px;
     height: 150px;
     margin: 20px auto;
-    border: 8px solid rgba(0, 255, 255, 0.5);
+    border: 8px solid var(--gauge-border-color);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 20px var(--gauge-box-shadow-color);
 }
 
 /* Needle Animation */
@@ -75,11 +158,11 @@ h2 {
     position: absolute;
     width: 4px;
     height: 50px;
-    background: cyan;
+    background: var(--needle-bg);
     transform-origin: bottom;
     transform: rotate(-90deg);
     transition: transform 1s ease-in-out;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 10px var(--needle-box-shadow-color);
 }
 
 /* Speed Text */
@@ -87,8 +170,8 @@ h2 {
     position: absolute;
     font-size: 22px;
     font-weight: bold;
-    color: #00eaff;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    color: var(--text-accent);
+    text-shadow: 0 0 10px var(--text-accent-shadow-color);
 }
 
 /* Loading Animation */
@@ -98,8 +181,8 @@ h2 {
 }
 
 .loader {
-    border: 4px solid rgba(0, 255, 255, 0.3);
-    border-top: 4px solid #00eaff;
+    border: 4px solid var(--loader-border-inactive);
+    border-top: 4px solid var(--loader-border-active);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -113,7 +196,7 @@ h2 {
     border: none;
     padding: 12px 20px;
     font-size: 18px;
-    color: #000;
+    color: var(--btn-text-color);
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
@@ -125,26 +208,26 @@ h2 {
 
 /* Start Test Button Specific Styles */
 #start-btn {
-    background: linear-gradient(135deg, #00eaff, #008cff);
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    background: var(--btn-start-bg-gradient);
+    box-shadow: 0 0 10px var(--btn-start-box-shadow-color);
     margin-top: 15px;
 }
 
 #start-btn:hover {
-    background: linear-gradient(135deg, #00ccff, #006aff);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    background: var(--btn-start-hover-bg-gradient);
+    box-shadow: 0 0 15px var(--btn-start-hover-box-shadow-color);
 }
 
 /* Export History Button Specific Styles */
 #export-btn {
-    background: linear-gradient(135deg, #00e096, #00b377);
-    box-shadow: 0 0 10px rgba(0, 224, 150, 0.5);
+    background: var(--btn-export-bg-gradient);
+    box-shadow: 0 0 10px var(--btn-export-box-shadow-color);
     margin-top: 10px;
 }
 
 #export-btn:hover {
-    background: linear-gradient(135deg, #00cc88, #009966);
-    box-shadow: 0 0 15px rgba(0, 204, 136, 0.8);
+    background: var(--btn-export-hover-bg-gradient);
+    box-shadow: 0 0 15px var(--btn-export-hover-box-shadow-color);
 }
 
 /* History Section */
@@ -155,7 +238,7 @@ h2 {
 
 .history h3 {
     font-size: 18px;
-    color: #00eaff;
+    color: var(--text-accent); /* Same as h2 */
     margin-bottom: 10px;
 }
 
@@ -167,5 +250,5 @@ h2 {
 .history li {
     font-size: 14px;
     margin-bottom: 5px;
-    color: #ccc;
+    color: var(--history-item-color);
 }

@@ -1,0 +1,15 @@
+{
+  "name": "internet-speed-checker",
+  "version": "1.0.0",
+  "description": "Internet speed checker application.",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
