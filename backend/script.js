@@ -69,3 +69,29 @@ function updateHistory() {
         )
         .join("");
 }
+
+function exportHistory() {
+    if (history.length === 0) {
+        alert("No history to export.");
+        return;
+    }
+
+    const header = "Test Number,Download (Mbps),Upload (Mbps),Ping (ms),Jitter (ms)";
+    const csvRows = history.map((result, index) => 
+        `${index + 1},${result.download},${result.upload},${result.ping},${result.jitter}`
+    );
+    const csvString = [header, ...csvRows].join("\n");
+
+    const blob = new Blob([csvString], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "speedtest_history.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+document.getElementById("export-btn").addEventListener("click", exportHistory);
